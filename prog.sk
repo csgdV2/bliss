@@ -1,0 +1,668 @@
+on load:
+	set {ObsidianTeam} to team named "EnchObi"
+	set team color of {ObsidianTeam} to yellow
+	set {EnchObsidian} to obsidian named "&d&lᴇɴᴄʜᴀɴᴛᴇᴅ ᴏʙꜱɪᴅɪᴀɴ" with lore "&5a powerfull piece of obsidian"
+	enchant {EnchObsidian} with mending
+
+on pickup:
+	if event-item's lore contains "&5a powerfull piece of obsidian" :
+		broadcast "&f%player% Has Picked up &d&lᴇɴᴄʜᴀɴᴛᴇᴅ ᴏʙꜱɪᴅɪᴀɴ"
+
+#[ <----- OBISIDIAN -----> ]
+
+every 2 seconds:
+	loop all players:
+		if {Prog1} is true:
+			if loop-player has obsidian named "&d&lᴇɴᴄʜᴀɴᴛᴇᴅ ᴏʙꜱɪᴅɪᴀɴ":
+				add loop-player to team entries of team named "EnchObi"
+				set team color of team of loop-player to yellow
+				set loop-player's tab name to "&d🔮 &e%loop-player%"
+				set loop-player's chat name to "&d🔮 &e%loop-player%"
+				apply glowing without particles to loop-player for 2.5 seconds replacing the existing effect
+			else if loop-player does not have obsidian named "&d&lᴇɴᴄʜᴀɴᴛᴇᴅ ᴏʙꜱɪᴅɪᴀɴ":
+				remove loop-player from team entries of team named "EnchObi"
+				set loop-player's tab name to "&f%loop-player%"
+				set loop-player's chat name to "&f%loop-player%"
+		if {Prog2} is true:
+			loop all items in loop-player's inventory:
+				if IsGem(loop-item) is true:
+					if WhatTier(loop-item) is 2:
+						if WhatGem(loop-item) is "flux":
+							set loop-player's tab name to "<##5ED7FF>&l🔮 &f| %loop-player%"
+							set loop-player's chat name to "<##5ED7FF>&l🔮 &f| %loop-player%"
+						if WhatGem(loop-item) is "fire":
+							set loop-player's tab name to "<#FFD580>🔮 &f| %loop-player%"
+							set loop-player's chat name to "<#FFD580>🔮 &f| %loop-player%"
+						if WhatGem(loop-item) is "strength":
+							set loop-player's tab name to "<##F10103>&l🔮 &f| %loop-player%"
+							set loop-player's chat name to "<##F10103>&l🔮 &f| %loop-player%"
+						if WhatGem(loop-item) is "astra":
+							set loop-player's tab name to "&5🔮 &f| %loop-player%"
+							set loop-player's chat name to "&5🔮 &f| %loop-player%"
+						if WhatGem(loop-item) is "puff":
+							set loop-player's tab name to "<##EFEFEF>&l🔮 &f| %loop-player%"
+							set loop-player's chat name to "<##EFEFEF>&l🔮 &f| %loop-player%"
+						if WhatGem(loop-item) is "speed":
+							set loop-player's tab name to "&e🔮 &f| %loop-player%"
+							set loop-player's chat name to "&e🔮 &f| %loop-player%"
+						if WhatGem(loop-item) is "wealth":
+							set loop-player's tab name to "&a🔮 &f| %loop-player%"
+							set loop-player's chat name to "&a🔮 &f| %loop-player%"
+						if WhatGem(loop-item) is "life":
+							set loop-player's tab name to "<##FE04B4>🔮 &f| %loop-player%"
+							set loop-player's chat name to "<##FE04B4>🔮 &f| %loop-player%"
+					
+					else if WhatTier(loop-item) is 1:
+						set loop-player's tab name to "&f%loop-player%"
+						set loop-player's chat name to "&f%loop-player%"
+							
+
+on place of obsidian:
+	if player's tool is not enchanted:
+		cancel event
+	else:
+		set {_loc} to location of event-block
+		remove 1 from y-coordinate of {_loc}
+		spawn shulker at {_loc}
+		set AI of last spawned entity to false
+		apply invisibility 99 to last spawned entity for 20000 minutes
+		apply glowing 99 to last spawned entity for 20000 minutes
+		add last spawned entity to team entries of team named "EnchObi"
+		set team color of team of last spawned entity to yellow
+		apply resistance 200 to last spawned entity for 20000 minutes
+	
+
+on block break:
+	if {Prog1} is true:
+		if event-block is obsidian:
+			set {_loc} to location of event-block
+			loop all entities within 2 blocks of {_loc}:
+				if loop-entity is a shulker:
+					cancel event
+					kill loop-entity
+					set block at {_loc} to air
+					drop 1 of {EnchObsidian} at {_loc}
+				else:
+					cancel event
+
+
+every 5 second:
+	loop all entities:
+		if loop-entity is shulker:
+			apply glowing to loop-entity for 50 seconds replacing existing effect
+			apply invisibility 10 to loop-entity for 50 seconds replacing existing effect
+			apply resistance 222 to loop-entity for 50 seconds replacing existing effect
+
+
+command /giveobsidian:
+	permission: op
+	trigger:
+		give {EnchObsidian} to player
+
+
+on drop:
+	if name of event-item is "&d&lᴇɴᴄʜᴀɴᴛᴇᴅ ᴏʙꜱɪᴅɪᴀɴ":
+		wait 1 tick
+		add event.getItemDrop() to team entries of team named "EnchObi"
+		event.getItemDrop().setGlowing(true)
+
+
+on form of obsidian:
+	if {Prog1} is true:
+		set event-block to stone
+
+
+#[ <----- Progressions -----> ]
+
+
+on join:
+	if {SmpStarted} is true:
+		if {joined::%player's uuid%} is not set:
+			set {_gem} to false
+			loop all items in player's inventory:
+				if IsGem(loop-item) is true:
+					set {_gem} to true
+			
+			if {_gem} is false:
+				set {_Gemrandom} to a random integer between 1 and 8
+				if {_Gemrandom} is 1:
+					set {_gem} to "strength"
+				else if {_Gemrandom} is 2:
+					set {_gem} to "speed"
+				else if {_Gemrandom} is 3:
+					set {_gem} to "fire"
+				else if {_Gemrandom} is 4:
+					set {_gem} to "life"
+				else if {_Gemrandom} is 5:
+					set {_gem} to "puff"
+				else if {_Gemrandom} is 6:
+					set {_gem} to "wealth"
+				else if {_Gemrandom} is 7:
+					set {_gem} to "astra"
+				else if {_Gemrandom} is 8:
+					set {_gem} to "flux"
+
+				give {-gem::%{_gem}%::1::5} to player
+				set {joined::%player's uuid%} to true
+
+
+command /prog <text>:
+	permission: op
+	trigger:
+		if arg-1 is "reset":
+			set {Prog1} to false
+			set {Prog2} to false
+			set {Prog3} to false
+			set {Prog4} to false
+			set {Prog5} to false
+			set {SmpStarted} to false
+		if arg-1 is "1":
+			loop all players:
+				set {_hasgem} to false
+				loop all items in loop-player's inventory:
+					if {_hasgem} is false:
+						if IsGem(loop-item) is true:
+							set {_hasgem} to true
+
+				if {_hasgem} is false:
+					set {_Gemrandom} to a random integer between 1 and 8
+
+					if {_Gemrandom} is 1:
+						set {_gem} to "strength"
+					else if {_Gemrandom} is 2:
+						set {_gem} to "speed"
+					else if {_Gemrandom} is 3:
+						set {_gem} to "fire"
+					else if {_Gemrandom} is 4:
+						set {_gem} to "life"
+					else if {_Gemrandom} is 5:
+						set {_gem} to "puff"
+					else if {_Gemrandom} is 6:
+						set {_gem} to "wealth"
+					else if {_Gemrandom} is 7:
+						set {_gem} to "astra"
+					else if {_Gemrandom} is 8:
+						set {_gem} to "flux"
+
+					give {-gem::%{_gem}%::1::5} to loop-player
+					set {joined::%loop-player's uuid%} to true
+					set {grace::%loop-player's uuid%} to 300
+
+			set {Prog1} to true
+			set {Prog2} to false
+			set {Prog3} to false
+			set {Prog4} to false
+			set {Prog5} to false
+			set {SmpStarted} to true
+			play sound "minecraft:ui.toast.challenge_complete" at volume 1 at pitch 1 to all players
+			send title "<##cafca4>&lPhase 1" with subtitle "<##f9f4d3>The Creation of Everything" to all players
+			execute console command "worldborder set 2000 200"
+
+		if arg-1 is "2":
+			set {Prog1} to false
+			set {Prog2} to true
+			set {Prog3} to false
+			set {Prog4} to false
+			set {Prog5} to false
+			set {SmpStarted} to true
+			play sound "minecraft:ui.toast.challenge_complete" at volume 1 at pitch 1 to all players
+			send title "&c&lPhase 2" with subtitle "<##FC8888>Into the Fire" to all players
+			execute console command "worldborder set 5000 500"
+			
+		if arg-1 is "3":
+			set {Prog2} to false
+			set {Prog1} to false
+			set {Prog3} to true
+			set {Prog4} to false
+			set {Prog5} to false
+			set {SmpStarted} to true
+			execute console command "recipe upgrader ON"
+			execute console command "recipe trader ON"
+			play sound "minecraft:ui.toast.challenge_complete" at volume 1 at pitch 1 to all players
+			send title "&5&lPhase 3" with subtitle "<##EB2ED8>The Final Gasp" to all players
+
+
+command /recipe <text> <text>:
+	permission: op
+	trigger:
+		if arg-1 is "upgrader":
+			if arg-2 is "ON":
+				register new shaped recipe for {-upgrader} using air and netherite ingot and air and netherite ingot and wither skeleton skull and netherite ingot and air and netherite ingot and air with id "upgrader"
+				broadcast "&bUpgrader recipe is now &l&aenabled"
+			if arg-2 is "OFF":
+				remove custom recipe "upgrader"
+				broadcast "&bUpgrader recipe is now &l&cdisabled"
+		if arg-1 is "trader":
+			if arg-2 is "ON":
+				register new shaped recipe for {-trader} using diamond block, gold block, diamond block, gold block, sculk catalyst, gold block, diamond block, gold block and diamond block with id "trader"
+				broadcast "&bTrader recipe is now &l&aenabled"
+			if arg-2 is "OFF":
+				remove custom recipe "trader"
+				broadcast "&btrader recipe is now &l&cdisabled"
+
+
+
+on tab complete for "/recipe":
+	set tab completions for position 1 to "upgrader" and "trader"
+	if tab arg-1 = "upgrader":
+		set tab completions for position 2 to "ON" and "OFF"
+	if tab arg-1 = "trader":
+		set tab completions for position 2 to "ON" and "OFF"
+
+on tab complete for "/prog":
+	set tab completions for position 1 to "reset" and "1" and "2"
+
+on tab complete for "/enderpearl":
+	set tab completions for position 1 to "ON" and "OFF"
+
+
+command /enderpearl <text>:
+	permission: op
+	trigger:
+		if arg-1 is "ON":
+			set {-pearl} to true
+			broadcast "&5EnderPearls &aare now &2enabled"
+		else if arg-1 is "OFF":
+			set {-pearl} to false
+			broadcast "&5EnderPearls &are now &cdisabled"
+
+
+on shoot:
+	if event-projectile is ender pearl:
+		if {-pearl} is false:
+			cancel event
+		else if {-pearl} is true:
+			if {-pearl::%shooter's uuid%} is not 0:
+				cancel event
+			else:
+				set {-pearl::%shooter's uuid%} to 10
+				stop
+
+on join:
+	set {pearl::%player's uuid%} to 0
+
+
+every 1 second:
+	loop all players:
+		if {-pearl::%loop-player's uuid%} > 0:
+			remove 1 from {-pearl::%loop-player's uuid%}
+		if {-pearl::%loop-player's uuid%} is not set:
+			set {-pearl::%loop-player's uuid%} to 0
+
+
+command /progwitherset:
+	permission: op
+	trigger:
+		set {sand1} to location 1 block below player
+		wait 2 ticks
+		set {jigsaw} to location 1 block above {sand1}
+		set {sand2} to location 1 block north of {jigsaw}
+		set {sand3} to location 1 block south of {jigsaw}
+		wait 1 second
+		set block at location at {sand1} to soul sand
+		set block at location at {sand2} to soul sand
+		set block at location at {sand3} to soul sand
+		set block at location at {jigsaw} to jigsaw block[orientation=up_west]
+		set block at location above {sand2} to wither skeleton skull
+		set block at location above {sand3} to wither skeleton skull
+
+on block place:
+	if event-block is within 1.8 blocks of {jigsaw}:
+		if event-block is wither skeleton skull:
+			broadcast "&4Wither Spawning!!!!"
+			wait 3 seconds
+			set block at location at {sand1} to air
+			set block at location at {sand2} to air
+			set block at location at {sand3} to air
+			set block at location at {jigsaw} to air
+			set block at location above {sand2} to air
+			set block at location above {sand3} to air
+			set block at location above {jigsaw} to air
+			execute console command "wither"
+		else:
+			cancel event
+
+on block break:
+	if event-block is within 3 blocks of {jigsaw}:
+		cancel event
+
+
+command /wither:
+	permission: op
+	trigger:
+		summon a wither at location at {jigsaw}
+		set last spawned entity's max health to 400
+		set last spawned entity's health to 400
+		apply glowing 2 to last spawned entity for 30 minutes
+		broadcast "&4 The Wither Appeared"
+		loop 5 times:
+			teleport last spawned entity at location at {jigsaw}
+			wait 10 ticks
+
+
+on death of a wither: # Upgrader Distribution
+	if {Prog1} is true:
+		execute console command "prog2"
+		loop 5 times:
+			set {_var1} to random number from -5 to 5
+			set {_var2} to random number from -5 to 5
+			set {Prog2offset} to location {_var1} to the left and {_var2} infront of the victim
+			drop {-upgrader} at {Prog2offset}
+			wait 2 ticks
+		loop 8 times:
+			set {_var1} to random number from -5 to 5 
+			set {_var2} to random number from -5 to 5 
+			set {Prog2offset} to location {_var1} to the left and {_var2} infront of the victim
+			drop {-trader} at {Prog2offset}
+			wait 2 ticks
+		loop 3 times:
+			set {_var1} to random number from -5 to 5 
+			set {_var2} to random number from -5 to 5 
+			set {Prog2offset} to location {_var1} to the left and {_var2} infront of the victim
+			drop {-Bliss.Revive.2} at {Prog2offset}
+			wait 2 ticks
+		loop 3 times:
+			set {_var1} to random number from -5 to 5 
+			set {_var2} to random number from -5 to 5 
+			set {Prog2offset} to location {_var1} to the left and {_var2} infront of the victim
+			drop {-Bliss.Repair.4} at {Prog2offset}
+			wait 2 ticks
+
+
+# Egg mace and obsidian
+
+on inventory click:
+	if type of player's current inventory is chest inventory:
+		if event-item is dragon egg or mace:
+			cancel event
+		if slot hotbar button of player's inventory is dragon egg or mace:
+			cancel event
+	if type of player's current inventory is barrel inventory:
+		if event-item is dragon egg or mace:
+			cancel event
+		if slot hotbar button of player's inventory is dragon egg or mace:
+			cancel event
+	if type of player's current inventory is workbench inventory:
+		if event-item is dragon egg or mace:
+			cancel event
+		if slot hotbar button of player's inventory is dragon egg or mace:
+			cancel event
+	if type of player's current inventory is ender chest inventory:
+		if event-item is dragon egg or mace:
+			cancel event
+		if slot hotbar button of player's inventory is dragon egg or mace:
+			cancel event
+	if type of player's current inventory is loom inventory:
+		if event-item is dragon egg or mace:
+			cancel event
+		if slot hotbar button of player's inventory is dragon egg or mace:
+			cancel event
+	if type of player's current inventory is hopper inventory:
+		if event-item is dragon egg or mace:
+			cancel event
+		if slot hotbar button of player's inventory is dragon egg or mace:
+			cancel event
+	if type of player's current inventory is merchant inventory:
+		if event-item is dragon egg or mace:
+			cancel event
+		if slot hotbar button of player's inventory is dragon egg or mace:
+			cancel event
+	if type of player's current inventory is chiseled bookshelf:
+		if event-item is dragon egg or mace:
+			cancel event
+		if slot hotbar button of player's inventory is dragon egg or mace:
+			cancel event
+	if type of player's current inventory is new smithing table:
+		if event-item is dragon egg or mace:
+			cancel event
+		if slot hotbar button of player's inventory is dragon egg or mace:
+			cancel event
+	if type of player's current inventory is bookshelf:
+		if event-item is dragon egg or mace:
+			cancel event
+		if slot hotbar button of player's inventory is dragon egg or mace:
+			cancel event
+	if type of player's current inventory is a jukebox:
+		if event-item is dragon egg or mace:
+			cancel event
+		if slot hotbar button of player's inventory is dragon egg or mace:
+			cancel event
+	if type of player's current inventory is beacon inventory:
+		if event-item is dragon egg or mace:
+			cancel event
+		if slot hotbar button of player's inventory is dragon egg or mace:
+			cancel event
+	if type of player's current inventory is shulker box inventory:
+		if event-item is dragon egg or mace:
+			cancel event
+		if slot hotbar button of player's inventory is dragon egg or mace:
+			cancel event
+	if type of player's current inventory is lectern inventory:
+		if event-item is dragon egg or mace:
+			cancel event
+		if slot hotbar button of player's inventory is dragon egg or mace:
+			cancel event
+	if type of player's current inventory is villager inventory:
+		if event-item is dragon egg or mace:
+			cancel event
+		if slot hotbar button of player's inventory is dragon egg or mace:
+			cancel event
+	if type of player's current inventory is a smoker inventory:
+		if event-item is dragon egg or mace:
+			cancel event
+		if slot hotbar button of player's inventory is dragon egg or mace:
+			cancel event
+	if type of player's current inventory is a brewing stand inventory:
+		if event-item is dragon egg or mace:
+			cancel event
+		if slot hotbar button of player's inventory is dragon egg or mace:
+			cancel event
+	if type of player's current inventory is grindstone inventory:
+		if event-item is dragon egg or mace:
+			cancel event
+		if slot hotbar button of player's inventory is dragon egg or mace:
+			cancel event
+	if type of player's current inventory is furnace inventory:
+		if event-item is dragon egg or mace:
+			cancel event
+		if slot hotbar button of player's inventory is dragon egg or mace:
+			cancel event
+	if type of player's current inventory is blast furnace inventory:
+		if event-item is dragon egg or mace:
+			cancel event
+		if slot hotbar button of player's inventory is dragon egg or mace:
+			cancel event
+	if type of player's current inventory is upgrade gear:
+		if event-item is dragon egg or mace:
+			cancel event
+		if slot hotbar button of player's inventory is dragon egg or mace:
+			cancel event
+	if type of player's current inventory is composter inventory:
+		if event-item is dragon egg or mace:
+			cancel event
+		if slot hotbar button of player's inventory is dragon egg or mace:
+			cancel event
+	if type of player's current inventory is an enchanting table inventory:
+		if event-item is dragon egg or mace:
+			cancel event
+		if slot hotbar button of player's inventory is dragon egg or mace:
+			cancel event
+	if type of player's current inventory is dropper inventory:
+		if event-item is dragon egg or mace:
+			cancel event
+		if slot hotbar button of player's inventory is dragon egg or mace:
+			cancel event
+	if type of player's current inventory is cartography table inventory:
+		if event-item is dragon egg or mace:
+			cancel event
+		if slot hotbar button of player's inventory is dragon egg or mace:
+			cancel event
+	if type of player's current inventory is upgrade gear table:
+		if event-item is dragon egg or mace:
+			cancel event
+		if slot hotbar button of player's inventory is dragon egg or mace:
+			cancel event
+	if type of player's current inventory is dispenser inventory:
+		if event-item is dragon egg or mace:
+			cancel event
+		if slot hotbar button of player's inventory is dragon egg or mace:
+			cancel event
+	if type of player's current inventory is stonecutter inventory:
+		if event-item is dragon egg or mace:
+			cancel event
+		if slot hotbar button of player's inventory is dragon egg or mace:
+			cancel event
+	if type of player's current inventory is anvil inventory:
+		if event-item is dragon egg or mace:
+			cancel event
+		if slot hotbar button of player's inventory is dragon egg or mace:
+			cancel event
+
+
+on inventory click:
+	if {Prog1} is true:
+		if type of player's current inventory is chest inventory:
+			if event-item is obsidian:
+				cancel event
+			if slot hotbar button of player's inventory is obsidian:
+				cancel event
+		if type of player's current inventory is barrel inventory:
+			if event-item is obsidian:
+				cancel event
+			if slot hotbar button of player's inventory is obsidian:
+				cancel event
+		if type of player's current inventory is workbench inventory:
+			if event-item is obsidian:
+				cancel event
+			if slot hotbar button of player's inventory is obsidian:
+				cancel event
+		if type of player's current inventory is ender chest inventory:
+			if event-item is obsidian:
+				cancel event
+			if slot hotbar button of player's inventory is obsidian:
+				cancel event
+		if type of player's current inventory is loom inventory:
+			if event-item is obsidian:
+				cancel event
+			if slot hotbar button of player's inventory is obsidian:
+				cancel event
+		if type of player's current inventory is hopper inventory:
+			if event-item is obsidian:
+				cancel event
+			if slot hotbar button of player's inventory is obsidian:
+				cancel event
+		if type of player's current inventory is merchant inventory:
+			if event-item is obsidian:
+				cancel event
+			if slot hotbar button of player's inventory is obsidian:
+				cancel event
+		if type of player's current inventory is chiseled bookshelf:
+			if event-item is obsidian:
+				cancel event
+			if slot hotbar button of player's inventory is obsidian:
+				cancel event
+		if type of player's current inventory is new smithing table:
+			if event-item is obsidian:
+				cancel event
+			if slot hotbar button of player's inventory is obsidian:
+				cancel event
+		if type of player's current inventory is bookshelf:
+			if event-item is obsidian:
+				cancel event
+			if slot hotbar button of player's inventory is obsidian:
+				cancel event
+		if type of player's current inventory is a jukebox:
+			if event-item is obsidian:
+				cancel event
+			if slot hotbar button of player's inventory is obsidian:
+				cancel event
+		if type of player's current inventory is beacon inventory:
+			if event-item is obsidian:
+				cancel event
+			if slot hotbar button of player's inventory is obsidian:
+			cancel event
+		if type of player's current inventory is shulker box inventory:
+			if event-item is obsidian:
+				cancel event
+			if slot hotbar button of player's inventory is obsidian:
+				cancel event
+		if type of player's current inventory is lectern inventory:
+			if event-item is obsidian:
+				cancel event
+			if slot hotbar button of player's inventory is obsidian:
+				cancel event
+		if type of player's current inventory is villager inventory:
+			if event-item is obsidian:
+				cancel event
+			if slot hotbar button of player's inventory is obsidian:
+				cancel event
+		if type of player's current inventory is a smoker inventory:
+			if event-item is obsidian:
+				cancel event
+			if slot hotbar button of player's inventory is obsidian:
+				cancel event
+		if type of player's current inventory is a brewing stand inventory:
+			if event-item is obsidian:
+				cancel event
+			if slot hotbar button of player's inventory is obsidian:
+				cancel event
+		if type of player's current inventory is grindstone inventory:
+			if event-item is obsidian:
+				cancel event
+			if slot hotbar button of player's inventory is obsidian:
+				cancel event
+		if type of player's current inventory is furnace inventory:
+			if event-item is obsidian:
+				cancel event
+			if slot hotbar button of player's inventory is obsidian:
+				cancel event
+		if type of player's current inventory is blast furnace inventory:
+			if event-item is obsidian:
+				cancel event
+			if slot hotbar button of player's inventory is obsidian:
+				cancel event
+		if type of player's current inventory is upgrade gear:
+			if event-item is obsidian:
+				cancel event
+			if slot hotbar button of player's inventory is obsidian:
+				cancel event
+		if type of player's current inventory is composter inventory:
+			if event-item is obsidian:
+				cancel event
+			if slot hotbar button of player's inventory is obsidian:
+				cancel event
+		if type of player's current inventory is an enchanting table inventory:
+			if event-item is obsidian:
+				cancel event
+			if slot hotbar button of player's inventory is obsidian:
+				cancel event
+		if type of player's current inventory is dropper inventory:
+			if event-item is obsidian:
+				cancel event
+			if slot hotbar button of player's inventory is obsidian:
+				cancel event
+		if type of player's current inventory is cartography table inventory:
+			if event-item is obsidian:
+				cancel event
+			if slot hotbar button of player's inventory is obsidian:
+				cancel event
+		if type of player's current inventory is upgrade gear table:
+			if event-item is obsidian:
+				cancel event
+			if slot hotbar button of player's inventory is obsidian:
+				cancel event
+		if type of player's current inventory is dispenser inventory:
+			if event-item is obsidian:
+				cancel event
+			if slot hotbar button of player's inventory is obsidian:
+				cancel event
+		if type of player's current inventory is stonecutter inventory:
+			if event-item is obsidian:
+				cancel event
+			if slot hotbar button of player's inventory is obsidian:
+				cancel event
+		if type of player's current inventory is anvil inventory:
+			if event-item is obsidian:
+				cancel event
+			if slot hotbar button of player's inventory is obsidian:
+				cancel event

@@ -1,0 +1,22 @@
+on inventory click:
+	if player's open inventory = event-inventory:
+		if any:
+			click action is lmb
+			click action is rmb
+		then:
+			if IsGem(player's cursor slot) is true:
+				cancel event
+
+on inventory drag:
+	set {_slots::*} to event.getRawSlots()
+	loop {_slots::*}:
+		set {_slot} to "%loop-value%"
+		replace all "[" with "" in {_slot}
+		replace all "]" with "" in {_slot}
+		set {_list::*} to split {_slot} at ", "
+
+	loop {_list::*}:
+		set {_num} to loop-value parsed as integer
+		if player's open inventory = event.getView().getInventory({_num}):
+			if IsGem(past event-item) is true:
+				cancel event

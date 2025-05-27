@@ -1,0 +1,643 @@
+command /nodupedgems:
+	permission: op
+	trigger:
+		loop all players:
+			loop all items in inventory of loop-player:
+				if IsGem(loop-item) is true:
+					set {_gem} to loop-item
+					loop all items in inventory of loop-player:
+						if IsGem(loop-item-2) is true:
+							if loop-item-2 is not {_gem}:
+								remove loop-item-2 from loop-player's inventory
+
+
+every 15 seconds:
+	execute console command "nodupedgems"
+
+# Left CLick Action inventory
+on inventory click:
+	if click type is left mouse button:
+		if type of player's current inventory is chest inventory:
+			if IsGem(event-item) is true:
+				cancel event
+		if type of player's current inventory is barrel inventory:
+			if IsGem(event-item) is true:
+				cancel event
+		if type of player's current inventory is workbench inventory:
+			if IsGem(event-item) is true:
+				cancel event
+		if type of player's current inventory is ender chest inventory:
+			if IsGem(event-item) is true:
+				cancel event
+		if type of player's current inventory is loom inventory:
+			if IsGem(event-item) is true:
+				cancel event
+		if type of player's current inventory is hopper inventory:
+			if IsGem(event-item) is true:
+				cancel event
+		if type of player's current inventory is merchant inventory:
+			if IsGem(event-item) is true:
+				cancel event
+		if type of player's current inventory is chiseled bookshelf:
+			if IsGem(event-item) is true:
+				cancel event
+		if type of player's current inventory is new smithing table:
+			if IsGem(event-item) is true:
+				cancel event
+		if type of player's current inventory is bookshelf:
+			if IsGem(event-item) is true:
+				cancel event
+		if type of player's current inventory is a jukebox:
+			if IsGem(event-item) is true:
+				cancel event
+		if type of player's current inventory is beacon inventory:
+			if IsGem(event-item) is true:
+				cancel event
+		if type of player's current inventory is shulker box inventory:
+			if IsGem(event-item) is true:
+				cancel event
+		if type of player's current inventory is lectern inventory:
+			if IsGem(event-item) is true:
+				cancel event
+		if type of player's current inventory is villager inventory:
+			if IsGem(event-item) is true:
+				cancel event
+		if type of player's current inventory is a smoker inventory:
+			if IsGem(event-item) is true:
+				cancel event
+		if type of player's current inventory is a brewing stand inventory:
+			if IsGem(event-item) is true:
+				cancel event
+		if type of player's current inventory is grindstone inventory:
+			if IsGem(event-item) is true:
+				cancel event
+		if type of player's current inventory is furnace inventory:
+			if IsGem(event-item) is true:
+				cancel event
+		if type of player's current inventory is blast furnace inventory:
+			if IsGem(event-item) is true:
+				cancel event
+		if type of player's current inventory is upgrade gear:
+			if IsGem(event-item) is true:
+				cancel event
+		if type of player's current inventory is composter inventory:
+			if IsGem(event-item) is true:
+				cancel event
+		if type of player's current inventory is an enchanting table inventory:
+			if IsGem(event-item) is true:
+				cancel event
+		if type of player's current inventory is dropper inventory:
+			if IsGem(event-item) is true:
+				cancel event
+		if type of player's current inventory is cartography table inventory:
+			if IsGem(event-item) is true:
+				cancel event
+		if type of player's current inventory is upgrade gear table:
+			if IsGem(event-item) is true:
+				cancel event
+		if type of player's current inventory is dispenser inventory:
+			if IsGem(event-item) is true:
+				cancel event
+		if type of player's current inventory is stonecutter inventory:
+			if IsGem(event-item) is true:
+				cancel event
+		if type of player's current inventory is anvil inventory:
+			if IsGem(event-item) is true:
+				cancel event
+
+
+
+# Right CLick Action 
+on inventory click:
+	if click type is right mouse button:
+		if type of player's current inventory is chest inventory:
+			if IsGem(event-item) is true:
+				cancel event
+		if type of player's current inventory is barrel inventory:
+			if IsGem(event-item) is true:
+				cancel event
+		if type of player's current inventory is workbench inventory:
+			if IsGem(event-item) is true:
+				cancel event
+		if type of player's current inventory is ender chest inventory:
+			if IsGem(event-item) is true:
+				cancel event
+		if type of player's current inventory is loom inventory:
+			if IsGem(event-item) is true:
+				cancel event
+		if type of player's current inventory is hopper inventory:
+			if IsGem(event-item) is true:
+				cancel event
+		if type of player's current inventory is merchant inventory:
+			if IsGem(event-item) is true:
+				cancel event
+		if type of player's current inventory is chiseled bookshelf:
+			if IsGem(event-item) is true:
+				cancel event
+		if type of player's current inventory is new smithing table:
+			if IsGem(event-item) is true:
+				cancel event
+		if type of player's current inventory is bookshelf:
+			if IsGem(event-item) is true:
+				cancel event
+		if type of player's current inventory is a jukebox:
+			if IsGem(event-item) is true:
+				cancel event
+		if type of player's current inventory is beacon inventory:
+			if IsGem(event-item) is true:
+				cancel event
+		if type of player's current inventory is shulker box inventory:
+			if IsGem(event-item) is true:
+				cancel event
+		if type of player's current inventory is lectern inventory:
+			if IsGem(event-item) is true:
+				cancel event
+		if type of player's current inventory is villager inventory:
+			if IsGem(event-item) is true:
+				cancel event
+		if type of player's current inventory is a smoker inventory:
+			if IsGem(event-item) is true:
+				cancel event
+		if type of player's current inventory is a brewing stand inventory:
+			if IsGem(event-item) is true:
+				cancel event
+		if type of player's current inventory is grindstone inventory:
+			if IsGem(event-item) is true:
+				cancel event
+		if type of player's current inventory is furnace inventory:
+			if IsGem(event-item) is true:
+				cancel event
+		if type of player's current inventory is blast furnace inventory:
+			if IsGem(event-item) is true:
+				cancel event
+		if type of player's current inventory is upgrade gear:
+			if IsGem(event-item) is true:
+				cancel event
+		if type of player's current inventory is composter inventory:
+			if IsGem(event-item) is true:
+				cancel event
+		if type of player's current inventory is an enchanting table inventory:
+			if IsGem(event-item) is true:
+				cancel event
+		if type of player's current inventory is dropper inventory:
+			if IsGem(event-item) is true:
+				cancel event
+		if type of player's current inventory is cartography table inventory:
+			if IsGem(event-item) is true:
+				cancel event
+		if type of player's current inventory is upgrade gear table:
+			if IsGem(event-item) is true:
+				cancel event
+		if type of player's current inventory is dispenser inventory:
+			if IsGem(event-item) is true:
+				cancel event
+		if type of player's current inventory is stonecutter inventory:
+			if IsGem(event-item) is true:
+				cancel event
+		if type of player's current inventory is anvil inventory:
+			if IsGem(event-item) is true:
+				cancel event
+
+
+
+
+# Left Click With Sneak
+on inventory click:
+	if click type is shift+lmb:
+		if type of player's current inventory is chest inventory:
+			if IsGem(event-item) is true:
+				cancel event
+		if type of player's current inventory is barrel inventory:
+			if IsGem(event-item) is true:
+				cancel event
+		if type of player's current inventory is workbench inventory:
+			if IsGem(event-item) is true:
+				cancel event
+		if type of player's current inventory is ender chest inventory:
+			if IsGem(event-item) is true:
+				cancel event
+		if type of player's current inventory is loom inventory:
+			if IsGem(event-item) is true:
+				cancel event
+		if type of player's current inventory is hopper inventory:
+			if IsGem(event-item) is true:
+				cancel event
+		if type of player's current inventory is merchant inventory:
+			if IsGem(event-item) is true:
+				cancel event
+		if type of player's current inventory is chiseled bookshelf:
+			if IsGem(event-item) is true:
+				cancel event
+		if type of player's current inventory is new smithing table:
+			if IsGem(event-item) is true:
+				cancel event
+		if type of player's current inventory is bookshelf:
+			if IsGem(event-item) is true:
+				cancel event
+		if type of player's current inventory is a jukebox:
+			if IsGem(event-item) is true:
+				cancel event
+		if type of player's current inventory is beacon inventory:
+			if IsGem(event-item) is true:
+				cancel event
+		if type of player's current inventory is shulker box inventory:
+			if IsGem(event-item) is true:
+				cancel event
+		if type of player's current inventory is lectern inventory:
+			if IsGem(event-item) is true:
+				cancel event
+		if type of player's current inventory is villager inventory:
+			if IsGem(event-item) is true:
+				cancel event
+		if type of player's current inventory is a smoker inventory:
+			if IsGem(event-item) is true:
+				cancel event
+		if type of player's current inventory is a brewing stand inventory:
+			if IsGem(event-item) is true:
+				cancel event
+		if type of player's current inventory is grindstone inventory:
+			if IsGem(event-item) is true:
+				cancel event
+		if type of player's current inventory is furnace inventory:
+			if IsGem(event-item) is true:
+				cancel event
+		if type of player's current inventory is blast furnace inventory:
+			if IsGem(event-item) is true:
+				cancel event
+		if type of player's current inventory is upgrade gear:
+			if IsGem(event-item) is true:
+				cancel event
+		if type of player's current inventory is composter inventory:
+			if IsGem(event-item) is true:
+				cancel event
+		if type of player's current inventory is an enchanting table inventory:
+			if IsGem(event-item) is true:
+				cancel event
+		if type of player's current inventory is dropper inventory:
+			if IsGem(event-item) is true:
+				cancel event
+		if type of player's current inventory is cartography table inventory:
+			if IsGem(event-item) is true:
+				cancel event
+		if type of player's current inventory is upgrade gear table:
+			if IsGem(event-item) is true:
+				cancel event
+		if type of player's current inventory is dispenser inventory:
+			if IsGem(event-item) is true:
+				cancel event
+		if type of player's current inventory is stonecutter inventory:
+			if IsGem(event-item) is true:
+				cancel event
+		if type of player's current inventory is anvil inventory:
+			if IsGem(event-item) is true:
+				cancel event
+
+# Hands Swap
+on inventory click:
+	if click type is swap offhand:
+		if type of player's current inventory is chest inventory:
+			if IsGem(event-item) is true:
+				cancel event
+		if type of player's current inventory is barrel inventory:
+			if IsGem(event-item) is true:
+				cancel event
+		if type of player's current inventory is workbench inventory:
+			if IsGem(event-item) is true:
+				cancel event
+		if type of player's current inventory is ender chest inventory:
+			if IsGem(event-item) is true:
+				cancel event
+		if type of player's current inventory is loom inventory:
+			if IsGem(event-item) is true:
+				cancel event
+		if type of player's current inventory is hopper inventory:
+			if IsGem(event-item) is true:
+				cancel event
+		if type of player's current inventory is merchant inventory:
+			if IsGem(event-item) is true:
+				cancel event
+		if type of player's current inventory is chiseled bookshelf:
+			if IsGem(event-item) is true:
+				cancel event
+		if type of player's current inventory is new smithing table:
+			if IsGem(event-item) is true:
+				cancel event
+		if type of player's current inventory is bookshelf:
+			if IsGem(event-item) is true:
+				cancel event
+		if type of player's current inventory is a jukebox:
+			if IsGem(event-item) is true:
+				cancel event
+		if type of player's current inventory is beacon inventory:
+			if IsGem(event-item) is true:
+				cancel event
+		if type of player's current inventory is shulker box inventory:
+			if IsGem(event-item) is true:
+				cancel event
+		if type of player's current inventory is lectern inventory:
+			if IsGem(event-item) is true:
+				cancel event
+		if type of player's current inventory is villager inventory:
+			if IsGem(event-item) is true:
+				cancel event
+		if type of player's current inventory is a smoker inventory:
+			if IsGem(event-item) is true:
+				cancel event
+		if type of player's current inventory is a brewing stand inventory:
+			if IsGem(event-item) is true:
+				cancel event
+		if type of player's current inventory is grindstone inventory:
+			if IsGem(event-item) is true:
+				cancel event
+		if type of player's current inventory is furnace inventory:
+			if IsGem(event-item) is true:
+				cancel event
+		if type of player's current inventory is blast furnace inventory:
+			if IsGem(event-item) is true:
+				cancel event
+		if type of player's current inventory is upgrade gear:
+			if IsGem(event-item) is true:
+				cancel event
+		if type of player's current inventory is composter inventory:
+			if IsGem(event-item) is true:
+				cancel event
+		if type of player's current inventory is an enchanting table inventory:
+			if IsGem(event-item) is true:
+				cancel event
+		if type of player's current inventory is dropper inventory:
+			if IsGem(event-item) is true:
+				cancel event
+		if type of player's current inventory is cartography table inventory:
+			if IsGem(event-item) is true:
+				cancel event
+		if type of player's current inventory is upgrade gear table:
+			if IsGem(event-item) is true:
+				cancel event
+		if type of player's current inventory is dispenser inventory:
+			if IsGem(event-item) is true:
+				cancel event
+		if type of player's current inventory is stonecutter inventory:
+			if IsGem(event-item) is true:
+				cancel event
+		if type of player's current inventory is anvil inventory:
+			if IsGem(event-item) is true:
+				cancel event
+
+
+
+# Number Keys
+on inventory click:
+	if click type is number key:
+		if type of player's current inventory is chest inventory:
+			if IsGem(event-item) is true:
+				cancel event
+		if type of player's current inventory is barrel inventory:
+			if IsGem(event-item) is true:
+				cancel event
+		if type of player's current inventory is workbench inventory:
+			if IsGem(event-item) is true:
+				cancel event
+		if type of player's current inventory is ender chest inventory:
+			if IsGem(event-item) is true:
+				cancel event
+		if type of player's current inventory is loom inventory:
+			if IsGem(event-item) is true:
+				cancel event
+		if type of player's current inventory is hopper inventory:
+			if IsGem(event-item) is true:
+				cancel event
+		if type of player's current inventory is merchant inventory:
+			if IsGem(event-item) is true:
+				cancel event
+		if type of player's current inventory is chiseled bookshelf:
+			if IsGem(event-item) is true:
+				cancel event
+		if type of player's current inventory is new smithing table:
+			if IsGem(event-item) is true:
+				cancel event
+		if type of player's current inventory is bookshelf:
+			if IsGem(event-item) is true:
+				cancel event
+		if type of player's current inventory is a jukebox:
+			if IsGem(event-item) is true:
+				cancel event
+		if type of player's current inventory is beacon inventory:
+			if IsGem(event-item) is true:
+				cancel event
+		if type of player's current inventory is shulker box inventory:
+			if IsGem(event-item) is true:
+				cancel event
+		if type of player's current inventory is lectern inventory:
+			if IsGem(event-item) is true:
+				cancel event
+		if type of player's current inventory is villager inventory:
+			if IsGem(event-item) is true:
+				cancel event
+		if type of player's current inventory is a smoker inventory:
+			if IsGem(event-item) is true:
+				cancel event
+		if type of player's current inventory is a brewing stand inventory:
+			if IsGem(event-item) is true:
+				cancel event
+		if type of player's current inventory is grindstone inventory:
+			if IsGem(event-item) is true:
+				cancel event
+		if type of player's current inventory is furnace inventory:
+			if IsGem(event-item) is true:
+				cancel event
+		if type of player's current inventory is blast furnace inventory:
+			if IsGem(event-item) is true:
+				cancel event
+		if type of player's current inventory is upgrade gear:
+			if IsGem(event-item) is true:
+				cancel event
+		if type of player's current inventory is composter inventory:
+			if IsGem(event-item) is true:
+				cancel event
+		if type of player's current inventory is an enchanting table inventory:
+			if IsGem(event-item) is true:
+				cancel event
+		if type of player's current inventory is dropper inventory:
+			if IsGem(event-item) is true:
+				cancel event
+		if type of player's current inventory is cartography table inventory:
+			if IsGem(event-item) is true:
+				cancel event
+		if type of player's current inventory is upgrade gear table:
+			if IsGem(event-item) is true:
+				cancel event
+		if type of player's current inventory is dispenser inventory:
+			if IsGem(event-item) is true:
+				cancel event
+		if type of player's current inventory is stonecutter inventory:
+			if IsGem(event-item) is true:
+				cancel event
+		if type of player's current inventory is anvil inventory:
+			if IsGem(event-item) is true:
+				cancel event
+
+# ANOTHER
+on inventory click:
+	if click type is swap offhand:
+		if player's offhand tool is set:
+			if player's offhand tool is amethyst shard or prismarine shard:
+				cancel event
+
+# ANOTHER ONE 
+
+on inventory click:
+	if {ghoost...%player%} is true:
+		cancel event
+	if type of player's current inventory is chest inventory:
+		if event-item is amethyst shard or prismarine shard:
+			cancel event
+		if slot hotbar button of player's inventory is amethyst shard or prismarine shard:
+			cancel event
+	if type of player's current inventory is barrel inventory:
+		if event-item is amethyst shard or prismarine shard:
+			cancel event
+		if slot hotbar button of player's inventory is amethyst shard or prismarine shard:
+			cancel event
+	if type of player's current inventory is workbench inventory:
+		if event-item is amethyst shard or prismarine shard:
+			cancel event
+		if slot hotbar button of player's inventory is amethyst shard or prismarine shard:
+			cancel event
+	if type of player's current inventory is ender chest inventory:
+		if event-item is amethyst shard or prismarine shard:
+			cancel event
+		if slot hotbar button of player's inventory is amethyst shard or prismarine shard:
+			cancel event
+	if type of player's current inventory is loom inventory:
+		if event-item is amethyst shard or prismarine shard:
+			cancel event
+		if slot hotbar button of player's inventory is amethyst shard or prismarine shard:
+			cancel event
+	if type of player's current inventory is hopper inventory:
+		if event-item is amethyst shard or prismarine shard:
+			cancel event
+		if slot hotbar button of player's inventory is amethyst shard or prismarine shard:
+			cancel event
+	if type of player's current inventory is merchant inventory:
+		if event-item is amethyst shard or prismarine shard:
+			cancel event
+		if slot hotbar button of player's inventory is amethyst shard or prismarine shard:
+			cancel event
+	if type of player's current inventory is chiseled bookshelf:
+		if event-item is amethyst shard or prismarine shard:
+			cancel event
+		if slot hotbar button of player's inventory is amethyst shard or prismarine shard:
+			cancel event
+	if type of player's current inventory is new smithing table:
+		if event-item is amethyst shard or prismarine shard:
+			cancel event
+		if slot hotbar button of player's inventory is amethyst shard or prismarine shard:
+			cancel event
+	if type of player's current inventory is bookshelf:
+		if event-item is amethyst shard or prismarine shard:
+			cancel event
+		if slot hotbar button of player's inventory is amethyst shard or prismarine shard:
+			cancel event
+	if type of player's current inventory is a jukebox:
+		if event-item is amethyst shard or prismarine shard:
+			cancel event
+		if slot hotbar button of player's inventory is amethyst shard or prismarine shard:
+			cancel event
+	if type of player's current inventory is beacon inventory:
+		if event-item is amethyst shard or prismarine shard:
+			cancel event
+		if slot hotbar button of player's inventory is amethyst shard or prismarine shard:
+			cancel event
+	if type of player's current inventory is shulker box inventory:
+		if event-item is amethyst shard or prismarine shard:
+			cancel event
+		if slot hotbar button of player's inventory is amethyst shard or prismarine shard:
+			cancel event
+	if type of player's current inventory is lectern inventory:
+		if event-item is amethyst shard or prismarine shard:
+			cancel event
+		if slot hotbar button of player's inventory is amethyst shard or prismarine shard:
+			cancel event
+	if type of player's current inventory is villager inventory:
+		if event-item is amethyst shard or prismarine shard:
+			cancel event
+		if slot hotbar button of player's inventory is amethyst shard or prismarine shard:
+			cancel event
+	if type of player's current inventory is a smoker inventory:
+		if event-item is amethyst shard or prismarine shard:
+			cancel event
+		if slot hotbar button of player's inventory is amethyst shard or prismarine shard:
+			cancel event
+	if type of player's current inventory is a brewing stand inventory:
+		if event-item is amethyst shard or prismarine shard:
+			cancel event
+		if slot hotbar button of player's inventory is amethyst shard or prismarine shard:
+			cancel event
+	if type of player's current inventory is grindstone inventory:
+		if event-item is amethyst shard or prismarine shard:
+			cancel event
+		if slot hotbar button of player's inventory is amethyst shard or prismarine shard:
+			cancel event
+	if type of player's current inventory is furnace inventory:
+		if event-item is amethyst shard or prismarine shard:
+			cancel event
+		if slot hotbar button of player's inventory is amethyst shard or prismarine shard:
+			cancel event
+	if type of player's current inventory is blast furnace inventory:
+		if event-item is amethyst shard or prismarine shard:
+			cancel event
+		if slot hotbar button of player's inventory is amethyst shard or prismarine shard:
+			cancel event
+	if type of player's current inventory is upgrade gear:
+		if event-item is amethyst shard or prismarine shard:
+			cancel event
+		if slot hotbar button of player's inventory is amethyst shard or prismarine shard:
+			cancel event
+	if type of player's current inventory is composter inventory:
+		if event-item is amethyst shard or prismarine shard:
+			cancel event
+		if slot hotbar button of player's inventory is amethyst shard or prismarine shard:
+			cancel event
+	if type of player's current inventory is an enchanting table inventory:
+		if event-item is amethyst shard or prismarine shard:
+			cancel event
+		if slot hotbar button of player's inventory is amethyst shard or prismarine shard:
+			cancel event
+	if type of player's current inventory is dropper inventory:
+		if event-item is amethyst shard or prismarine shard:
+			cancel event
+		if slot hotbar button of player's inventory is amethyst shard or prismarine shard:
+			cancel event
+	if type of player's current inventory is cartography table inventory:
+		if event-item is amethyst shard or prismarine shard:
+			cancel event
+		if slot hotbar button of player's inventory is amethyst shard or prismarine shard:
+			cancel event
+	if type of player's current inventory is upgrade gear table:
+		if event-item is amethyst shard or prismarine shard:
+			cancel event
+		if slot hotbar button of player's inventory is amethyst shard or prismarine shard:
+			cancel event
+	if type of player's current inventory is dispenser inventory:
+		if event-item is amethyst shard or prismarine shard:
+			cancel event
+		if slot hotbar button of player's inventory is amethyst shard or prismarine shard:
+			cancel event
+	if type of player's current inventory is stonecutter inventory:
+		if event-item is amethyst shard or prismarine shard:
+			cancel event
+		if slot hotbar button of player's inventory is amethyst shard or prismarine shard:
+			cancel event
+	if type of player's current inventory is anvil inventory:
+		if event-item is amethyst shard or prismarine shard:
+			cancel event
+		if slot hotbar button of player's inventory is amethyst shard or prismarine shard:
+			cancel event
+
+on right click on entity:
+	if IsGem(player's held item) is true:
+		if event-entity is a item frame:
+			cancel event
+	if IsGem(player's offhand item) is true:
+		if event-entity is item frame:
+			cancel event

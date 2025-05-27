@@ -1,0 +1,52 @@
+command /trade <text> <text>:
+	trigger:
+		if arg-1 is set:
+			set {_pl} to arg-1 parsed as player
+			set {_arguuid} to {_pl}'s uuid
+			if arg-2 is set:
+				if arg-2 is "send":
+					set {_uuid} to uuid of player
+					set {-trader::%{_uuid}%} to 35
+					add {_arguuid} to {traderq::%{_uuid}%::*}
+					send "<##FFD773>🔮 &aSent Gem Trading Request to <##B8FFFB>%{_pl}%" to player
+					send "<##FFD773>🔮 &f%player% &aSent You Gem Trading Request to <##B8FFFB> Type /trade %player% accept &f to accept their request" to {_pl}
+					wait 35 seconds
+					remove {_arguuid} from {traderq::%{_uuid}%::*}
+				if arg-2 is "accept":
+					set {_uuid} to uuid of player
+					if {_uuid} contains {traderq::%{_arguuid}%::*}:
+						if {-trader::%{_arguuid}%} > 0:
+							loop all items in player's inventory:
+								if IsGem(loop-item-1) is true:
+									loop all items in {_pl}'s inventory:
+										if IsGem(loop-item-2) is true:
+											set {_e2} to WhatEnergy(loop-item-2)
+											set {_g2} to WhatGem(loop-item-2)
+											set {_t2} to WhatTier(loop-item-2)
+											set {_e1} to WhatEnergy(loop-item-1)
+											set {_g1} to WhatGem(loop-item-1)
+											set {_t1} to WhatTier(loop-item-1)
+											remove loop-item-2 from {_pl}'s inventory
+											give {-gem::%{_g1}%::%{_t1}%::%{_e1}%} to {_pl}
+											send "&b🔮 &e Trade Sucessful" to {_pl}
+											remove loop-item-1 from player's inventory
+											give {-gem::%{_g2}%::%{_t2}%::%{_e2}%} to player 
+											remove {_uuid} from {traderq::%{_arguuid}%::*}
+											send "&b🔮 &e Trade Sucessful" to player
+					
+					else:
+						send "&4 Wrong Player"
+					
+					
+
+on tab complete for "/trade":
+	set tab completions for position 1 to all players
+	set tab completions for position 2 to "send" and "accept"
+
+every 1 second:
+	loop all players:
+		if {-trader::%loop-player's uuid%} > -1:
+			remove 1 from {-trader::%loop-player's uuid%}
+		if  {-trader::%loop-player's uuid%} is 0:
+			send "<##FFD773>🔮 &cYour Gem trade <##B8FFFB>request has expired" to loop-player
+			delete {traderq::%loop-player's uuid%::*}
