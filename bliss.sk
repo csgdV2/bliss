@@ -2453,9 +2453,9 @@ function BountyHunter(p1: player, p2: player):
     loop (distance between {_loc} and {_p2}) / 0.4 times:
 
         add 1 to {_distance}
-        draw 3 dust using dustOption(rgb(241, 3, 3), 2) at {_loc} with force
+        draw 3 dust using dustOption(rgb(241, 3, 3), 2) at {_loc} with force for {_p1}
         set {_loc} to {_loc} ~ {_v}
-        if {_distance} = 35:
+        if {_distance} = 16:
             stop
     wait 0.25 seconds
 
